@@ -1,0 +1,16 @@
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-namespace-comms
+spec:
+  types:
+    - Ingress
+    - Egress
+  ingress:
+    - action: Allow
+      source:
+        namespaceSelector: kubernetes.io/metadata.name == 'calico-test'
+  egress:
+    - action: Allow
+      destination:
+        namespaceSelector: kubernetes.io/metadata.name == 'calico-test'
