@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dais-core-db
-  namespace: #{KUBERNETESNAMESPACE}#
 spec:
   replicas: 1
   selector:

@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inputs-generator-j3u453cewp5q
-  namespace: #{KUBERNETESNAMESPACE}#
 spec:
   replicas: 1
   selector:

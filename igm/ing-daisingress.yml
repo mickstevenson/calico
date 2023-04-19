@@ -3,7 +3,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: daisingress
-  namespace: #{KUBERNETESNAMESPACE}#
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
     #appgw.ingress.kubernetes.io/override-frontend-port: "8080"

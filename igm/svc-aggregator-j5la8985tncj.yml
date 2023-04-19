@@ -3,7 +3,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: aggregator-j5la8985tncj
-  namespace: #{KUBERNETESNAMESPACE}#
 spec:
   ports:
     - name: aggregator-j5la8985tncj
