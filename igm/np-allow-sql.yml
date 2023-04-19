@@ -1,0 +1,29 @@
+---
+# https://docs.microsoft.com/en-us/azure/azure-sql/database/connectivity-architecture
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-sql
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 13.75.149.87/32
+        - ipBlock:
+            cidr: 40.79.161.1/32
+        - ipBlock:
+            cidr: 13.70.112.9/32
+        - ipBlock:
+            cidr: 13.70.112.32/29
+        - ipBlock:
+            cidr: 40.79.160.32/29
+        - ipBlock:
+            cidr: 40.79.168.32/29
+      ports:
+        - protocol: TCP
+          port: 1433

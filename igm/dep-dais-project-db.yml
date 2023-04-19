@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dais-project-db
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dais-project-db
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: dais-project-db
+        aadpodidbinding: poaz01dais001
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+      securityContext:
+        fsGroup: 9000
+      containers:
+        - name: dais-project-db
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/dais-project-db:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 7007
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 3000Mi
+              cpu: 1300m
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"

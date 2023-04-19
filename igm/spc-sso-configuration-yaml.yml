@@ -1,0 +1,39 @@
+---
+# The block in sso-configuration.txt needs to be stored in Azure KeyVault in a multi-line secret.
+# ---
+# apiVersion: v1
+# kind: Secret
+# type: Opaque
+# metadata:
+#   name: sso-configuration-yaml
+#   namespace: #{KUBERNETESNAMESPACE}#
+# data:
+#   sso-config.yml: ""
+# ---
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: sso-configuration-yaml
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  provider: azure
+  secretObjects: # [OPTIONAL] SecretObject defines the desired state of synced K8s secret objects
+    - secretName: sso-configuration-yaml
+      type: Opaque # type of the Kubernetes Secret object e.g. Opaque, kubernetes.io/tls
+      data:
+        - objectName: sso-config.yml # name of the mounted content to sync. this could be the object name or the object alias
+          key: sso-config.yml # name of the Kubernetes Secret object
+  parameters:
+    usePodIdentity: "true"
+    useVMManagedIdentity: "false"
+    userAssignedIdentityID: ""
+    keyvaultName: "poaz01key010"
+    cloudName: ""
+    objects: |
+      array:
+        - |
+          objectName: SSO-CONFIG-YML
+          objectAlias: sso-config.yml
+          objectType: secret
+          objectVersion: ""
+    tenantId: "8f73f427-32e5-4a3b-8d42-b369b956a96b"

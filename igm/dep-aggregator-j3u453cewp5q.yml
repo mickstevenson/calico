@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aggregator-j3u453cewp5q
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: aggregator-j3u453cewp5q
+        aadpodidbinding: poaz01dais001
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j3u453cewp5q/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j3u453cewp5q/
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_aggregator:83
+          imagePullPolicy: IfNotPresent
+          name: aggregator-j3u453cewp5q
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application

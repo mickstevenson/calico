@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aggregator-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: aggregator-j5la8985tncj
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: aggregator-j5la8985tncj
+  type: ClusterIP

@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: get-results-dockermodelrunner
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: get-results-dockermodelrunner
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: get-results-dockermodelrunner
+        aadpodidbinding: poaz01dais001
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+      securityContext:
+        fsGroup: 9000
+      terminationGracePeriodSeconds: 3600
+      serviceAccountName: dockermodelrunner-cluster-service-account
+      containers:
+        - name: get-results-dockermodelrunner
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-dockermodelrunner:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            limits:
+              cpu: 1300m
+              memory: 2000Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"

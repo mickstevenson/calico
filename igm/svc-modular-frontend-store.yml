@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: modular-frontend-store
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: modular-frontend-store
+  type: ClusterIP

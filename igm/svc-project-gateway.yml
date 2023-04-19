@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-gateway
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    - name: priv
+      port: 7007
+      protocol: TCP
+      targetPort: 7007
+  selector:
+    app: project-gateway
+  type: ClusterIP

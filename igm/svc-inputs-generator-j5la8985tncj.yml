@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inputs-generator-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: inputs-generator-j5la8985tncj
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: inputs-generator-j5la8985tncj
+  type: ClusterIP

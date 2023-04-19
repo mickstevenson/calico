@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskgen-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: taskgen-j5la8985tncj
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: taskgen-j5la8985tncj
+  type: ClusterIP
