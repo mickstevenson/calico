@@ -26,9 +26,9 @@ spec:
       containers:
         - env:
             - name: FILE_MANAGER_URL
-              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j3u453cewp5q/
+              value: http://file-manager.{{ $kubernetesNamespace }}:8000/files/volume/projects/j3u453cewp5q/
             - name: PROJECT_ANALYTICS_SERVICE_URL
-              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j3u453cewp5q/
+              value: http://analytics-service.{{ $kubernetesNamespace }}:3090/analytics/projects/j3u453cewp5q/
           image: {{ $acrName }}.azurecr.io/dcceew/apps/dais/j3u453cewp5q_taskgen:83
           imagePullPolicy: IfNotPresent
           name: taskgen-j3u453cewp5q

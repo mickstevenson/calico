@@ -6,8 +6,8 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: dockermodelrunner-cluster-service-account
-namespace: #{KUBERNETESNAMESPACE}#
-  roleRef:
+    namespace: {{ $kubernetesNamespace }}
+roleRef:
   kind: ClusterRole
   name: dockermodelrunner-cluster-service-account
   apiGroup: rbac.authorization.k8s.io
