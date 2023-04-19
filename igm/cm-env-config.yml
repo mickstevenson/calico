@@ -102,7 +102,7 @@ data:
   AZURE_MESSAGE_BUS_HOST: "#{SERVICEBUSNAME}#.servicebus.windows.net"
   AZURE_MESSAGE_BUS_USER: "dais"
   AZURE_STORAGE_ACCOUNT_NAME: "#{STORAGEACCOUNTNAME}"
-  DOCKERMODELRUNNER_IMAGE_TAG: "#{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-dockermodelrunner:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5"
+  DOCKERMODELRUNNER_IMAGE_TAG: "{{ $acrName }}.azurecr.io/dcceew/apps/dais/get-results-dockermodelrunner:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5"
   ANALYTICS_DB_NAME: "dais"
   AUTHSERVICE_DB_NAME: "dais"
   DAIS_CORE_DB_NAME: "dais"

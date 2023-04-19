@@ -29,7 +29,7 @@ spec:
               value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j3u453cewp5q/
             - name: PROJECT_ANALYTICS_SERVICE_URL
               value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j3u453cewp5q/
-          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_taskgen:83
+          image: {{ $acrName }}.azurecr.io/dcceew/apps/dais/j3u453cewp5q_taskgen:83
           imagePullPolicy: IfNotPresent
           name: taskgen-j3u453cewp5q
           ports:

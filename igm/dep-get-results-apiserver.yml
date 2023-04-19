@@ -33,7 +33,7 @@ spec:
             - configMapRef:
                 name: env-config
           imagePullPolicy: Always
-          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-apiserver:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          image: {{ $acrName }}.azurecr.io/dcceew/apps/dais/get-results-apiserver:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
           ports:
             - containerPort: 3090
             - containerPort: 3091
