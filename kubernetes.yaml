@@ -1,0 +1,2253 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+  namespace: #{KUBERNETESNAMESPACE}#
+data:
+  AMQP_HOST: ""
+  ANALYTICS_SERVICE_HOST: "analytics-service"
+  ANALYTICS_SERVICE_PORT: "3090"
+  APISERVER_PRIVILEGED_HOST: "apiserver"
+  APISERVER_PRIVILEGED_PORT: "3091"
+  AWS_S3_ACCESS_KEY_ID: ""
+  AWS_S3_BUCKET: ""
+  AWS_S3_SECRET_ACCESS_KEY: ""
+  CDN: "/cdn"
+  DISABLE_CI_CD_SERVICE: "true"
+  CI_CD_USE_NODE_POOLS: ""
+  CI_CD_USE_RESOURCE_CONSTRAINTS: ""
+  CORE_DB_HOST: "dais-core-db"
+  CORE_DB_PORT: "8000"
+  CORE_DB_PORT_PRIVILEGED: "7007"
+  CORE_DOCKER_REGISTRY: ""
+  CORE_USES_IMAGE_PULL_SECRETS: ""
+  SEQUELIZE_DB_DIALECT: "mssql"
+  DB_HOST: "#{SQLSERVERNAME}#.database.windows.net"
+  DB_PORT: "1433"
+  DB_USER: "#{SQLSERVERUSER}#"
+  DEFAULT_GATEWAY_ROUTE_TIMEOUT: "120"
+  DISABLE_MODEL_UPLOADS: "true"
+  DOCKERMODELRUNNER_MEMORY: "16000"
+  DOMAIN_NAME: "#{DAISDOMAINNAME}#"
+  FILE_MANAGER_HOST: "file-manager"
+  FILE_MANAGER_PORT: "8000"
+  FILE_SYSTEM_TYPE: "azure"
+  FILESYSTEM_SERVICE_ACCOUNT: "" # needs to be addressed with Pod Identity
+  GCP_BUCKET: ""
+  GCP_QUARANTINED_BUCKET: ""
+  GCP_SCANNED_BUCKET: ""
+  GCP_UNSCANNED_BUCKET: ""
+  GCP_CDN_BUCKET: ""
+  GCP_KEY_FILE: ""
+  GCP_EXPORT_BUCKET: ""
+  KUBERNETES_NAMESPACE: "#{KUBERNETESNAMESPACE}#"
+  LOGSTASH_HOST: ""
+  MALWARE_SCAN: "false"
+  MINIO_ACCESS_KEY: ""
+  PROJECT_DB_HOST: "dais-project-db"
+  PROJECT_DB_PORT: "8000"
+  PROJECT_DB_PORT_PRIVILEGED: "7007"
+  QUEUE_LOGGING: "logging"
+  QUEUE_MAIL: "mail"
+  QUEUE_MODEL_ERRORS: "modelerrors"
+  QUEUE_PROCESS_ERRORS: "processerrors"
+  QUEUE_RESULTS: "results"
+  QUEUE_RUNS_STATUS: "runs.status"
+  QUEUE_SLACK: "slack"
+  QUEUE_SUBMISSION_FINISH: "submissionfinished"
+  QUEUE_TASKS: "tasks"
+  RABBITMQ_DEFAULT_USER: ""
+  REDIS_HOST: "#{REDISCACHEHOSTNAME}#.redis.cache.windows.net"
+  REDIS_PORT: "6380"
+  REDIS_USE_TLS: "true"
+  SLACK_CHANNEL: ""
+  SLACK_USERNAME: ""
+  SUPPORT_MAIL: "1@2.com" # TODO?
+  TWILIO_FROM_PHONE: ""
+  USE_LOGSTASH: "false"
+  USE_S3: "false"
+  PROJECT_SERVICES_JENKINS_USER: ""
+  ARBITRARY_CODE_DAIS_ADMINS_ONLY: "true"
+  DISABLE_LEGACY_FRONTEND_WRAPPER: "false"
+  SUPER_ADMIN_HOST: "dais"
+  SUPER_ADMIN_HOST_LEGACY_SUPPORT: "false"
+  GCP_PROJECT: ""
+  USE_APM: "false"
+  PROJECT_SERVICES_JENKINS_DOCKER_REGISTRY: ""
+  PROJECT_SERVICES_JENKINS_DOCKER_REGISTRY_USERNAME: ""
+  PROJECT_SERVICES_JENKINS_DOCKER_REGISTRY_PASSWORD: ""
+  PROJECT_SERVICES_JENKINS_DOCKER_REGISTRY_AUTH_TYPE: ""
+  PROJECT_SERVICES_USE_IMAGE_PULL_SECRETS: ""
+  HOSTS_TO_ALLOW_PROJECT_CREATION: "creator"
+  HOSTS_TO_ALLOW_JS_BUNDLE_OVERWRITE: "creator"
+  HOSTS_TO_ALLOW_USERGROUP_MODIFICATION: "creator"
+  HOSTS_TO_ALLOW_CI_CD_SERVICE: "creator"
+  HOSTS_TO_ALLOW_USER_INVITE: "creator"
+
+  MIN_JAVAMODELRUNNER_PROCESSES: "2"
+  MAX_JAVAMODELRUNNER_PROCESSES: "60"
+  MIN_RMODELRUNNER_PROCESSES: "1"
+  MAX_RMODELRUNNER_PROCESSES: "30"
+  MIN_DOCKERMODELRUNNER_PROCESSES: "2"
+  MAX_DOCKERMODELRUNNER_PROCESSES: "30"
+
+  DAIS_RELEASE_VERSION: "0.0.0"
+
+  # Need to rename for consistency:
+  AZURE_PROJECTS_CONTAINER_NAME: "poaz01stg007-blb-dais" # TODO - igmdata?
+
+  USE_EXTERNAL_K8S_CLUSTER: "false"
+  EXTERNAL_K8S_CLUSTER_PROVIDER: "azure"
+  EXTERNAL_GCP_CLUSTER_PROJECT: ""
+  EXTERNAL_GCP_CLUSTER_NAME: ""
+  EXTERNAL_GCP_CLUSTER_ZONE: ""
+  EXTERNAL_CLUSTER_REVERSE_PROJECT_GATEWAY_LOAD_BALANCER_IP: ""
+
+  APP_LINEAGE_MODE: "STANDARD"
+
+  MESSAGE_QUEUE_PROVIDER: "azure"
+  AZURE_MESSAGE_BUS_HOST: "#{SERVICEBUSNAME}#.servicebus.windows.net"
+  AZURE_MESSAGE_BUS_USER: "dais"
+
+  AZURE_STORAGE_ACCOUNT_NAME: "#{STORAGEACCOUNTNAME}"
+
+  DOCKERMODELRUNNER_IMAGE_TAG: "#{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-dockermodelrunner:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5"
+
+  ANALYTICS_DB_NAME: "dais"
+  AUTHSERVICE_DB_NAME: "dais"
+  DAIS_CORE_DB_NAME: "dais"
+  GATEWAY_DB_NAME: "dais"
+  GETRESULTS_DB_NAME: "dais"
+  MODULAR_FRONTEND_STORE_DB_NAME: "dais"
+  PROJECTS_DB_NAME: "dais"
+  WEBSITE_DB_NAME: "dais"
+
+  # TODO: need app insights deployed and key saved to kv
+  AZURE_APP_INSIGHTS_CONNECTION_STRING: "#{AppInsightsConnectionString}"
+
+  AZURE_AD_REGISTERED_GROUP_ID: "dd723e7e-e07f-4fbe-b7ac-73cebffc5791" # TODO azdo #430048
+  AZURE_AD_PRIVILEGED_GROUP_ID: "b970e64f-f250-41bc-9b99-515fa3bf9940" # TODO azdo #430048
+  AZURE_AD_ADMIN_GROUP_ID: "ce9d7048-ccbc-48e2-a98a-8ad090dba5a6" # TODO azdo #430048
+
+  CLEAN_UP_DOCKERMODELRUNNER_PODS: "true"
+
+  USE_AAD_DB_AUTH: "true"
+
+  SSO_CONFIGURATION_PATH: "/sso-config/sso-config.yml"
+
+  REVERSE_PROJECT_GATEWAY_SECRET: "x"
+
+  MODEL_NODE_SELECTOR_KEY: "node-pool-category"
+  MODEL_NODE_SELECTOR_VALUE: "application"
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dais-ns-quota
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  hard:
+    requests.cpu: "88"
+    requests.memory: "352Gi"
+    limits.cpu: "88"
+    limits.memory: "352Gi"
+---
+# apiVersion: v1
+# kind: Secret
+# type: Opaque
+# metadata:
+#   name: daiscore-secret
+#   namespace: #{KUBERNETESNAMESPACE}#
+# stringData:
+#   API_SECRET: ""
+#   DB_PASSWORD: ""
+#   PROJECT_RESOURCES_API_SECRET: ""
+#   REDIS_PASS: ""
+#   AZURE_MESSAGE_BUS_PASS: ""
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: daiscore-secret
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  provider: azure
+  secretObjects: # [OPTIONAL] SecretObject defines the desired state of synced K8s secret objects
+    - secretName: daiscore-secret
+      type: Opaque # type of the Kubernetes Secret object e.g. Opaque, kubernetes.io/tls
+      data:
+        - objectName: API-SECRET # name of the mounted content to sync. this could be the object name or the object alias
+          key: API_SECRET # name of the Kubernetes Secret object
+        - objectName: DB-PASSWORD # name of the mounted content to sync. this could be the object name or the object alias
+          key: DB_PASSWORD # name of the Kubernetes Secret object
+        - objectName: REDIS-PASS # name of the mounted content to sync. this could be the object name or the object alias
+          key: REDIS_PASS # name of the Kubernetes Secret object
+        - objectName: AZURE-MESSAGE-BUS-PASS
+          key: AZURE_MESSAGE_BUS_PASS
+  parameters:
+    usePodIdentity: "true"
+    useVMManagedIdentity: "false"
+    userAssignedIdentityID: ""
+    keyvaultName: "poaz01key010"
+    cloudName: ""
+    objects: |
+      array:
+        - |
+          objectName: API-SECRET
+          objectType: secret
+          objectVersion: ""
+        - |
+          objectName: DB-PASSWORD
+          objectType: secret
+          objectVersion: ""      
+        - |
+          objectName: REDIS-PASS
+          objectType: secret
+          objectVersion: "" 
+        - |
+          objectName: AZURE-MESSAGE-BUS-PASS
+          objectType: secret
+          objectVersion: ""
+    tenantId: "8f73f427-32e5-4a3b-8d42-b369b956a96b"
+---
+# The block in sso-configuration.txt needs to be stored in Azure KeyVault in a multi-line secret.
+# ---
+# apiVersion: v1
+# kind: Secret
+# type: Opaque
+# metadata:
+#   name: sso-configuration-yaml
+#   namespace: #{KUBERNETESNAMESPACE}#
+# data:
+#   sso-config.yml: ""
+# ---
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: sso-configuration-yaml
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  provider: azure
+  secretObjects: # [OPTIONAL] SecretObject defines the desired state of synced K8s secret objects
+    - secretName: sso-configuration-yaml
+      type: Opaque # type of the Kubernetes Secret object e.g. Opaque, kubernetes.io/tls
+      data:
+        - objectName: sso-config.yml # name of the mounted content to sync. this could be the object name or the object alias
+          key: sso-config.yml # name of the Kubernetes Secret object
+  parameters:
+    usePodIdentity: "true"
+    useVMManagedIdentity: "false"
+    userAssignedIdentityID: ""
+    keyvaultName: "poaz01key010"
+    cloudName: ""
+    objects: |
+      array:
+        - |
+          objectName: SSO-CONFIG-YML
+          objectAlias: sso-config.yml
+          objectType: secret
+          objectVersion: ""
+    tenantId: "8f73f427-32e5-4a3b-8d42-b369b956a96b"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: dockermodelrunner-cluster-service-account
+  namespace: #{KUBERNETESNAMESPACE}#
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["*"]
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dockermodelrunner-cluster-service-account
+  namespace: #{KUBERNETESNAMESPACE}#
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: default-crb
+  namespace: #{KUBERNETESNAMESPACE}#
+subjects:
+  - kind: ServiceAccount
+    name: dockermodelrunner-cluster-service-account
+    namespace: #{KUBERNETESNAMESPACE}#
+roleRef:
+  kind: ClusterRole
+  name: dockermodelrunner-cluster-service-account
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: aggregator-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: aggregator-j3u453cewp5q
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: aggregator-j3u453cewp5q
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j3u453cewp5q/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j3u453cewp5q/
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_aggregator:83
+          imagePullPolicy: IfNotPresent
+          name: aggregator-j3u453cewp5q
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+
+      restartPolicy: Always
+
+      terminationGracePeriodSeconds: 30
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aggregator-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: aggregator-j3u453cewp5q
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: aggregator-j3u453cewp5q
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: aggregator-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: aggregator-j5la8985tncj
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: aggregator-j5la8985tncj
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j5la8985tncj/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j5la8985tncj/
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_aggregator:83
+          imagePullPolicy: IfNotPresent
+          name: aggregator-j5la8985tncj
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+
+      restartPolicy: Always
+
+      terminationGracePeriodSeconds: 30
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aggregator-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: aggregator-j5la8985tncj
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: aggregator-j5la8985tncj
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: analytics-service
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: analytics-service
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: analytics-service
+        allowProjectResourceAccess: "allow"
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: analytics-service
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/analytics-service:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 3090
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 1000Mi
+              cpu: 500m
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: analytics-service
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 3090
+      protocol: TCP
+      targetPort: 3090
+  selector:
+    app: analytics-service
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: auth-service
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: auth-service
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: auth-service
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: auth-service
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/auth-service:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 1000Mi
+              cpu: 500m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - mountPath: /sso-config
+              name: sso-configuration-yaml
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: sso-configuration-yaml
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "sso-configuration-yaml"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: auth-service
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dais-core-db
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: dais-core-db
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: dais-core-db
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: dais-core-db
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/dais-core-db:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 7007
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1200m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dais-core-db
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    - name: privileged
+      port: 7007
+      protocol: TCP
+      targetPort: 7007
+  selector:
+    app: dais-core-db
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dais-project-db
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: dais-project-db
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: dais-project-db
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: dais-project-db
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/dais-project-db:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 7007
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 3000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dais-project-db
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    - name: privileged
+      port: 7007
+      protocol: TCP
+      targetPort: 7007
+  selector:
+    app: dais-project-db
+  type: ClusterIP
+  sessionAffinity: ClientIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: file-manager
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: file-manager
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: file-manager
+        allowProjectResourceAccess: "allow"
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: file-manager
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/file-manager:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 1000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: file-manager
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: file-manager
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: get-results-apimodelrunner
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: get-results-apimodelrunner
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: get-results-apimodelrunner
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: get-results-apimodelrunner
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-apimodelrunner:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3090
+            - containerPort: 3091
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1300m
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: get-results-apiserver
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: get-results-apiserver
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: get-results-apiserver
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: get-results-apiserver
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-apiserver:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 3090
+            - containerPort: 3091
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 3090
+            initialDelaySeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apiserver
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 3090
+      protocol: TCP
+      targetPort: 3090
+    - name: privileged
+      port: 3091
+      protocol: TCP
+      targetPort: 3091
+  selector:
+    app: get-results-apiserver
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: get-results-dockermodelrunner
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: get-results-dockermodelrunner
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: get-results-dockermodelrunner
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      terminationGracePeriodSeconds: 3600
+
+      serviceAccountName: dockermodelrunner-cluster-service-account
+
+      containers:
+        - name: get-results-dockermodelrunner
+
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/get-results-dockermodelrunner:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          resources:
+            limits:
+              cpu: 1300m
+              memory: 2000Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: inputs-generator-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: inputs-generator-j3u453cewp5q
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: inputs-generator-j3u453cewp5q
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j3u453cewp5q/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j3u453cewp5q/
+
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_inputs-generator:83
+          imagePullPolicy: IfNotPresent
+          name: inputs-generator-j3u453cewp5q
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+
+      restartPolicy: Always
+
+      terminationGracePeriodSeconds: 30
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inputs-generator-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: inputs-generator-j3u453cewp5q
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: inputs-generator-j3u453cewp5q
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: inputs-generator-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: inputs-generator-j5la8985tncj
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: inputs-generator-j5la8985tncj
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j5la8985tncj/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j5la8985tncj/
+
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_inputs-generator:83
+          imagePullPolicy: IfNotPresent
+          name: inputs-generator-j5la8985tncj
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+
+      restartPolicy: Always
+
+      terminationGracePeriodSeconds: 30
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inputs-generator-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: inputs-generator-j5la8985tncj
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: inputs-generator-j5la8985tncj
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: modular-frontend-store
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: modular-frontend-store
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: modular-frontend-store
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: modular-frontend-store
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/modular-frontend-store:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 1000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: modular-frontend-store
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: modular-frontend-store
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: project-gateway
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: project-gateway
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: project-gateway
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: project-gateway
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/project-gateway:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 8000
+            - containerPort: 7007
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-gateway
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    - name: priv
+      port: 7007
+      protocol: TCP
+      targetPort: 7007
+  selector:
+    app: project-gateway
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: results-service
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: results-service
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: results-service
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: results-service
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/results-service:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: results-service
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: results-service
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: taskgen-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: taskgen-j3u453cewp5q
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: taskgen-j3u453cewp5q
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j3u453cewp5q/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j3u453cewp5q/
+
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_taskgen:83
+          imagePullPolicy: IfNotPresent
+          name: taskgen-j3u453cewp5q
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+
+      terminationGracePeriodSeconds: 30
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskgen-j3u453cewp5q
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: taskgen-j3u453cewp5q
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: taskgen-j3u453cewp5q
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: taskgen-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: taskgen-j5la8985tncj
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        app: taskgen-j5la8985tncj
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      containers:
+        - env:
+            - name: FILE_MANAGER_URL
+              value: http://file-manager.#{KUBERNETESNAMESPACE}#:8000/files/volume/projects/j5la8985tncj/
+            - name: PROJECT_ANALYTICS_SERVICE_URL
+              value: http://analytics-service.#{KUBERNETESNAMESPACE}#:3090/analytics/projects/j5la8985tncj/
+
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/j3u453cewp5q_taskgen:83
+          imagePullPolicy: IfNotPresent
+          name: taskgen-j5la8985tncj
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 3000Mi
+            requests:
+              cpu: 300m
+              memory: 600Mi
+
+      terminationGracePeriodSeconds: 30
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskgen-j5la8985tncj
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: taskgen-j5la8985tncj
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: taskgen-j5la8985tncj
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: upload-service
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: upload-service
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: upload-service
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: upload-service
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/upload-service:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1300m
+
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upload-service
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: upload-service
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: website
+  namespace: #{KUBERNETESNAMESPACE}#
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: website
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      labels:
+        app: website
+        aadpodidbinding: poaz01dais001
+
+    spec:
+      imagePullSecrets:
+        - name: core-docker-registry-secret
+
+      securityContext:
+        fsGroup: 9000
+
+      containers:
+        - name: website
+          imagePullPolicy: Always
+          image: #{ACRNAME}#.azurecr.io/dcceew/apps/dais/website:2.1.0-diser.136-07bf1944ef73a328cd93e7a2c9a57251298785c5
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "10"]
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: daiscore-secret
+            - configMapRef:
+                name: env-config
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 2000Mi
+              cpu: 1300m
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8000
+            initialDelaySeconds: 10
+
+          volumeMounts:
+            - name: daiscore-secret
+              mountPath: /mnt/daiscore-secret
+              readOnly: true
+
+          securityContext:
+            runAsUser: 9000
+            allowPrivilegeEscalation: false
+
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+        "node-pool-category": application
+
+      volumes:
+        - name: daiscore-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "daiscore-secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  ports:
+    - name: main
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: website
+  type: ClusterIP
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: default-deny
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-dns
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector: {}
+        - podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-nmi
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 127.0.0.1/32
+      ports:
+        - protocol: TCP
+          port: 2579
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-namespace-comms
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {}
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {}
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-app-gateway
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 10.177.0.0/27
+      ports:
+        - protocol: TCP
+          port: 80
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 8000
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-blob-storage
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+      ports:
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 80
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-servicebus
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+      ports:
+        - protocol: TCP
+          port: 5671
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-redis-cache
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+      ports:
+        - protocol: TCP
+          port: 6380
+---
+# https://docs.microsoft.com/en-us/azure/azure-sql/database/connectivity-architecture
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-sql
+  namespace: #{KUBERNETESNAMESPACE}#
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 13.75.149.87/32
+        - ipBlock:
+            cidr: 40.79.161.1/32
+        - ipBlock:
+            cidr: 13.70.112.9/32
+        - ipBlock:
+            cidr: 13.70.112.32/29
+        - ipBlock:
+            cidr: 40.79.160.32/29
+        - ipBlock:
+            cidr: 40.79.168.32/29
+      ports:
+        - protocol: TCP
+          port: 1433
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: daisingress
+  namespace: #{KUBERNETESNAMESPACE}#
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    #appgw.ingress.kubernetes.io/override-frontend-port: "8080"
+    appgw.ingress.kubernetes.io/backend-path-prefix: "/"
+    #appgw.ingress.kubernetes.io/backend-hostname
+    #appgw.ingress.kubernetes.io/backend-protocol
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/appgw-ssl-certificate: dais-prod
+    #appgw.ingress.kubernetes.io/appgw-trusted-root-certificate
+    #appgw.ingress.kubernetes.io/connection-draining
+    #appgw.ingress.kubernetes.io/connection-draining-timeout
+    #appgw.ingress.kubernetes.io/cookie-based-affinity
+    #appgw.ingress.kubernetes.io/request-timeout
+    appgw.ingress.kubernetes.io/use-private-ip: "true"
+    appgw.ingress.kubernetes.io/waf-policy-for-path: /subscriptions/fa4702cd-90d8-4bd5-af87-efacebcec735/resourceGroups/rg-az01-po-com-aks001/providers/Microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/waf-dais-prod
+    #appgw.ingress.kubernetes.io/health-probe-hostname
+    #appgw.ingress.kubernetes.io/health-probe-port
+    #appgw.ingress.kubernetes.io/health-probe-path
+    #appgw.ingress.kubernetes.io/health-probe-status-codes
+    #appgw.ingress.kubernetes.io/health-probe-interval
+    #appgw.ingress.kubernetes.io/health-probe-timeout
+    #appgw.ingress.kubernetes.io/health-probe-unhealthy-threshold
+spec:
+  rules:
+    - host: dais.industry.gov.au
+      http:
+        paths:
+          - path: /data/*
+            backend:
+              serviceName: dais-project-db
+              servicePort: 8000
+          - path: /auth/*
+            backend:
+              serviceName: auth-service
+              servicePort: 8000
+          - path: /data2/*
+            backend:
+              serviceName: dais-core-db
+              servicePort: 8000
+          - path: /project-gateway/*
+            backend:
+              serviceName: project-gateway
+              servicePort: 8000
+          - path: /upload/*
+            backend:
+              serviceName: upload-service
+              servicePort: 8000
+          - path: /backend/*
+            backend:
+              serviceName: modular-frontend-store
+              servicePort: 8000
+          - path: /
+            backend:
+              serviceName: website
+              servicePort: 8000
+---
+
