@@ -1,7 +1,7 @@
 apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
-  name: allow-ingress
+  name: allow-egress
   namespace: dais-dev
 spec:
   selector: all()
