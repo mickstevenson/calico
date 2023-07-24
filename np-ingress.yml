@@ -6,10 +6,10 @@ metadata:
 spec:
   selector: all()
   types:
-    - Egress
+    - Ingress
   egress:
     - action: Allow
-      destination:
+      source:
         nets:
           - 0.0.0.0/0
       protocol: TCP
